@@ -76,20 +76,22 @@ const get = (model, domain, done) => {
 
 const app = document.getElementById("app");
 
-const run = (model) => get(model, "users", () =>
-    get(model, "posts",
+const run = (model) => get(model, "users", () => {
+    const title = Wrapper.generate("h1", "Articulos", true).element;
+    return get(model, "posts",
         () => {
             model.users.forEach(user => model.userIdx[user.id] = user);
             app.innerText = '';
+            app.appendChild(title);
             model.posts.forEach(post =>
                 app.appendChild(renderPost(post, model.userIdx[post.userId]))
             );
         }
     )
-);
+});
 
 export function setupBlog(element) {
-    element.innerHTML = "Articles";
+    element.innerHTML = "Articulos";
     element.addEventListener('click', () => run({
         userIdx: {}
     }));

@@ -1,5 +1,4 @@
 import './style.css'
-import javascriptLogo from './public/javascript.svg'
 import TwitterX from './public/twitterx.svg'
 import Perfil from './public/perfil.jpeg'
 import Github from './public/github-mark-white.png'

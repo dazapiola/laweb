@@ -76,12 +76,22 @@ const get = (model, domain, done) => {
 
 const app = document.getElementById("app");
 
+const renderHeader = () => {
+    return Wrapper.generate("div", "").addClass("header")
+            .appendChild(Wrapper.generate("span", "< Ale Zapiola >"))
+            .appendChild(Wrapper.generate("span", "").addClass("menu")
+            .appendChild(AnchorWrapper.generate("/", 'Home', "_self"))
+            .appendChild(AnchorWrapper.generate("/", 'About', "_self")))
+            .element
+}
+
 const run = (model) => get(model, "users", () => {
     const title = Wrapper.generate("h1", "Articulos", true).element;
     return get(model, "posts",
         () => {
             model.users.forEach(user => model.userIdx[user.id] = user);
             app.innerText = '';
+            app.appendChild(renderHeader());
             app.appendChild(title);
             model.posts.forEach(post =>
                 app.appendChild(renderPost(post, model.userIdx[post.userId]))
